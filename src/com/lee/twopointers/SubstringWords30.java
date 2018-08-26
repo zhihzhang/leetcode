@@ -21,34 +21,20 @@ public class SubstringWords30 {
 	public List<Integer> findSubstring(String s, String[] words) {
 		List<Integer> resultList = new ArrayList<Integer>();
 		List<String> wordList = Arrays.asList(words);
-		
-		
-		int max = 0;
-		Set<Integer> set = new HashSet<Integer>();
-		for (String word : words) {
-			max = Math.max(max, word.length());
-			set.add(word.length());
-		}
-		
-//		Set<String> set = new HashSet<String>();
-//		long start = System.currentTimeMillis();
-//		for (String word : words) {
-//			if (word.length() == 1) {
-//				continue;
-//			}
-//			char[] x = word.toCharArray();
-//			StringBuilder sb = new StringBuilder();
-//			for (int i = 0; i < x.length - 1; i++) {
-//				sb.append(x[i]);
-//				set.add(sb.toString());
-//			}
-//		}
-//		System.out.println("..." + (System.currentTimeMillis() - start));
-		
-//		Set<String> memSet = new HashSet<String>();
+		Set<String> set = new HashSet<String>();
 
-		
-		long start = System.currentTimeMillis();
+		for (String word : words) {
+			if (word.length() == 1) {
+				continue;
+			}
+			char[] x = word.toCharArray();
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < x.length - 1; i++) {
+				sb.append(x[i]);
+				set.add(sb.toString());
+			}
+		}
+
 		char[] array = s.toCharArray();
 		for (int i = 0; i < array.length; i++) {
 			List<String> tempList = new ArrayList<String>();
@@ -56,31 +42,15 @@ public class SubstringWords30 {
 
 			StringBuilder sb = new StringBuilder();			
 			int j = i;
-			int k = i;
 			while (j < array.length) {
 				sb.append(array[j]);
-				
-				
-				
-//				String t = sb.toString();
-//				if (!set.contains(t) && !tempList.contains(t)) {
-//					j = array.length + 1;
-//					continue;
-//				}
-				if (!set.contains(j - k)) {
-					if (j - k > max) {
-						j = array.length + 1;
-					}
-					j++;
+				if (!set.contains(sb.toString()) && !tempList.contains(sb.toString())) {
+					j = array.length + 1;
 					continue;
 				}
-				String t = sb.toString();
-				
-				if (tempList.contains(t)) {
-					tempList.remove(t);
+				if (tempList.remove(sb.toString())) {
 					if (tempList.size() == 0) {
 						resultList.add(i);
-						k = j;
 						j = array.length + 1;
 						continue;
 					} else {
@@ -90,9 +60,9 @@ public class SubstringWords30 {
 				j++;
 			}
 		}
-		System.out.println("..." + (System.currentTimeMillis() - start));
 
 		return resultList;
+
 	}
 
 }
