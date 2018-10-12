@@ -2,10 +2,10 @@ package com.lee.hashmap;
 
 import java.util.Arrays;
 
-public class HIndex {
+public class HIndex274 {
 
 	public static void main(String[] args) {
-		HIndex obj = new HIndex();
+		HIndex274 obj = new HIndex274();
 		int n;
 		n = obj.hIndex(new int[]{3,0,6,1,5});
 		System.out.println(n);
