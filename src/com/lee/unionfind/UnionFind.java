@@ -1,4 +1,4 @@
-package unionfind;
+package com.lee.unionfind;
 
 public class UnionFind {
 

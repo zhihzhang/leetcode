@@ -1,4 +1,4 @@
-package unionfind;
+package com.lee.unionfind;
 
 //https://leetcode.com/problems/friend-circles/discuss/101336/Java-solution-Union-Find
 public class FriendCicle {

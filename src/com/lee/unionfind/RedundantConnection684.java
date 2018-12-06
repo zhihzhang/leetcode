@@ -1,4 +1,4 @@
-package unionfind;
+package com.lee.unionfind;
 
 public class RedundantConnection684 {
 	public static void main(String[] args) {
