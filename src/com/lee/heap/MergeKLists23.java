@@ -3,6 +3,8 @@ package com.lee.heap;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import com.lee.common.ListNode;
+
 public class MergeKLists23 {
 
 	public static void main(String[] args) {
@@ -38,13 +40,6 @@ public class MergeKLists23 {
 		return head.next;
     }
     
-	public class ListNode {
-		int val;
-		ListNode next;
 
-		ListNode(int x) {
-			val = x;
-		}
-	}
 
 }

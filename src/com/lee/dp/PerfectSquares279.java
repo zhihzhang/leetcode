@@ -1,7 +1,20 @@
 package com.lee.dp;
 
+import com.lee.binarysearch.Search2DMatrixII240;
+
 public class PerfectSquares279 {
+	public static void main(String[] args) {
+		PerfectSquares279 obj = new PerfectSquares279();
+	}
+	
 	public int numSquares(int n) {
+//	    int t = Math.sqrt(n);
+	    
+	    
+	    return 0;
+	}
+	
+	public int numSquares_tt(int n) {
 	    int[] dp = new int[n + 1];
 	    for (int i = 1; i <= n; i++) {
 	        dp[i] = Integer.MAX_VALUE;
@@ -33,4 +46,6 @@ public class PerfectSquares279 {
 	    
 	    return dp[n];
 	}
+	
+
 }

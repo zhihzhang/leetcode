@@ -33,21 +33,26 @@ public class IsomorphicString205 {
 			return false;
 		}
 
-		Map<Character, Integer> x = new HashMap<Character, Integer>();
-		Map<Character, Integer> y = new HashMap<Character, Integer>();
+		Map<Character, Character> ma = new HashMap<Character, Character>();
+		Map<Character, Character> mb = new HashMap<Character, Character>();
 
 		for (int i = 0; i < s.length(); i++) {
 			char a = s.charAt(i);
 			char b = t.charAt(i);
-			int n1 = x.getOrDefault(a, -1);
-			int n2 = y.getOrDefault(b, -1);
-			if (!(n1 == n2)) {
+			if(!ma.containsKey(a) && !mb.containsKey(b)){
+				ma.put(a, b);
+				mb.put(b, a);
+				continue;
+			}
+			if ((ma.containsKey(a) && !mb.containsKey(b))
+					|| (!ma.containsKey(b) && mb.containsKey(a)) 
+					|| ma.get(a) != b
+					|| mb.get(b) != a) {
 				return false;
 			}
-			x.put(a, i);
-			y.put(b, i);
-		}
 
+
+		}
 		return true;
 	}
 
