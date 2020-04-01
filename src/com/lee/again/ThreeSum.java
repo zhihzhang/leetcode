@@ -23,6 +23,45 @@ public class ThreeSum {
 	public List<List<Integer>> threeSum(int[] nums) {
 		List<List<Integer>> result = new ArrayList<>();
 		Arrays.sort(nums);
+		
+		Set<String> set = new HashSet<>();
+
+		for (int i = 0; i < nums.length - 2; i++) {
+			if (i > 0 && nums[i] == nums[i - 1]) {
+				continue;
+			}
+			int a = nums[i];
+			int l = i + 1;
+			int r = nums.length - 1;
+
+			while (l < r) {
+				int t = a + nums[l] + nums[r];
+				if (t == 0) {
+					List<Integer> list = new ArrayList<>();
+					list.add(a);
+					list.add(nums[l]);
+					list.add(nums[r]);
+					if(!set.contains(list.toString())){
+						result.add(list);
+						set.add(list.toString());
+					}
+					
+					l++;
+					r--;
+				} else if (t < 0) {
+					l++;
+				} else {
+					r--;
+				}
+			}
+		}
+		return result;
+
+	}
+
+	public List<List<Integer>> threeSum123(int[] nums) {
+		List<List<Integer>> result = new ArrayList<>();
+		Arrays.sort(nums);
 		Map<Integer, Integer> map = new HashMap<>();
 		for (int i : nums) {
 			map.put(i, map.getOrDefault(i, 0) + 1);

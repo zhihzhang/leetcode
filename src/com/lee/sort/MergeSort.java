@@ -24,8 +24,9 @@ public class MergeSort {
 	}
 
 	private static void Sort(int[] a, int left, int right) {
-		if (left >= right)
+		if (left >= right){
 			return;
+		}
 
 		int mid = (left + right) / 2;
 		// 二路归并排序里面有两个Sort，多路归并排序里面写多个Sort就可以了
