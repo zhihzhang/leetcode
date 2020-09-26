@@ -13,31 +13,33 @@ public class DeleteNodesAndReturnForest {
 	}
 
 	public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+		List<Integer> del = new ArrayList<>();
+		for (int n : to_delete) {
+			del.add(n);
+		}
 		List<TreeNode> list = new ArrayList<>();
-		list.add(root);
-		if (root == null || to_delete == null || to_delete.length == 0) {
-			return list;
-		}
-		Set<Integer> vals = new HashSet<>();
-		for (int i : to_delete) {
-			vals.add(i);
-		}
-		getNode(root, vals, list);
+		getNodes(root, del, list, null);
 		return list;
+
 	}
 
-	public TreeNode getNode(TreeNode root, Set<Integer> vals, List<TreeNode> list) {
+	public TreeNode getNodes(TreeNode root, List<Integer> del, List<TreeNode> list, TreeNode parent) {
 		if (root == null) {
 			return null;
 		}
-		if (vals.contains(root.val)) {
-			list.add(getNode(root.left, vals, list));
-			list.add(getNode(root.right, vals, list));
+
+		if (del.contains(root.val)) {
+			getNodes(root.left, del, list, null);
+			getNodes(root.right, del, list, null);
 			return null;
+		} else {
+			if (parent == null) {
+				list.add(root);
+			}
+			root.left = getNodes(root.left, del, list, root);
+			root.right = getNodes(root.right, del, list, root);
+			return root;
 		}
-		root.left = getNode(root.left, vals, list);
-		root.right = getNode(root.right, vals, list);
-		return root;
 	}
 
 }

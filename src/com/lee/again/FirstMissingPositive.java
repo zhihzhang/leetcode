@@ -5,8 +5,9 @@ import java.util.Arrays;
 public class FirstMissingPositive {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		FirstMissingPositive obj = new FirstMissingPositive();
+		int[] nums = new int[]{1,99,100};
+		System.out.println(obj.firstMissingPositive(nums));
 	}
 
 	public int firstMissingPositive(int[] nums) {

@@ -23,35 +23,29 @@ public class IsomorphicStrings {
 		if (s.length() != t.length()) {
 			return false;
 		}
-		
-		Map<Character, Integer> sMap = new HashMap<>();
-		Map<Character, Integer> tMap = new HashMap<>();
-		
-		List<Integer> sList = new ArrayList<>();
-		List<Integer> tList = new ArrayList<>();
-		
-		for(int i=0;i<s.length();i++){
+		Map<Character, Integer> a = new HashMap<>();
+		Map<Character, Integer> b = new HashMap<>();
+		List<Integer> list01 = new ArrayList<>();
+		List<Integer> list02 = new ArrayList<>();
+		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
-			if(!sMap.containsKey(c)){
-				sMap.put(c, i);
-				sList.add(i);
-			}else{
-				sList.add(sMap.get(c));
+			if (a.containsKey(c)) {
+				list01.add(a.get(c));
+			} else {
+				a.put(c, i);
+				list01.add(i);
 			}
 		}
-		
-		for(int i=0;i<t.length();i++){
+		for (int i = 0; i < t.length(); i++) {
 			char c = t.charAt(i);
-			if(!tMap.containsKey(c)){
-				tMap.put(c, i);
-				tList.add(i);
-			}else{
-				tList.add(tMap.get(c));
+			if (b.containsKey(c)) {
+				list02.add(b.get(c));
+			} else {
+				b.put(c, i);
+				list02.add(i);
 			}
 		}
-		
-		return sList.toString().equals(tList.toString());
-
+		return list01.toString().equals(list02.toString());
 	}
 
 }

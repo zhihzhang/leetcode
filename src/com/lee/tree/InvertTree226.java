@@ -6,16 +6,16 @@ public class InvertTree226 {
 		InvertTree226 obj = new InvertTree226();
 
 	}
-	
-    public TreeNode invertTree(TreeNode root) {
+
+	public TreeNode invertTree(TreeNode root) {
 		if (root == null) {
 			return null;
 		}
-		TreeNode l = root.left;
-		TreeNode r = root.right;
-		root.left = invertTree(r);
-		root.right = invertTree(l);
+		TreeNode left = root.left;
+		root.left = invertTree(root.right);
+		
+		root.right = invertTree(left);
 		return root;
-    }
+	}
 
 }

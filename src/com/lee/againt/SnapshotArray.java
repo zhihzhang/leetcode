@@ -14,30 +14,32 @@ public class SnapshotArray {
 		System.out.println(obj.get(0, 0));
 
 	}
-	
+
+	Map<Integer, Map<Integer, Integer>> map = new HashMap<>();
 	int snapId = 0;
-	Map<Integer, Map<Integer, Integer>> history = new HashMap<>();
-	Map<Integer, Integer> map = new HashMap<>();
-	
-    public SnapshotArray(int length) {
-    }
-    
-    public void set(int index, int val) {
-    	map.put(index, val);
-    }
-    
-    public int snap() {
-    	Map<Integer, Integer> snap = new HashMap<>(map); 
-    	System.out.println(snap.toString());
-    	history.put(snapId, snap);
-    	return snapId++;
-    }
-    
-    public int get(int index, int snap_id) {
-    	if(!history.containsKey(index)){
-    		return 0;
-    	}
-    	return history.get(snap_id).getOrDefault(index, 0);
-    }
+
+	public SnapshotArray(int length) {
+		Map<Integer, Integer> t = new HashMap<>();
+		map.put(snapId, t);
+	}
+
+	public void set(int index, int val) {
+		map.get(snapId).put(index, val);
+	}
+
+	public int snap() {
+		Map<Integer, Integer> t = new HashMap<>();
+		t.putAll(map.get(snapId));
+		map.put(snapId + 1, t);
+		return snapId++;
+	}
+
+	public int get(int index, int snap_id) {
+		Map<Integer, Integer> t = map.get(snap_id);
+		if (t != null) {
+			return t.getOrDefault(index, 0);
+		}
+		return 0;
+	}
 
 }

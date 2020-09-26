@@ -19,8 +19,11 @@ public class ConstructBinaryTree {
 		// System.out.println(Arrays.toString(t));
 
 		ConstructBinaryTree obj = new ConstructBinaryTree();
-		TreeNode root = obj.constructFromPrePost(new int[] { 1, 2, 4, 5, 3, 6, 7 }, new int[] { 4, 5, 2, 6, 7, 3, 1 });
-		obj.print(root);
+//		TreeNode root01 = obj.constructFromPrePost(new int[] { 1, 2, 4, 5, 3, 6, 7 }, new int[] { 4, 5, 2, 6, 7, 3, 1 });
+//		TreeNode root02 = obj.constructFromPrePost(new int[] { 1, 2 }, new int[] { 2, 1 });
+		TreeNode root02 = obj.constructFromPrePost(new int[] { 1,3,2,4 }, new int[] { 3,4,2,1 });
+//		obj.print(root01);
+		obj.print(root02);
 	}
 	//
 	// 2 4 5
@@ -30,25 +33,33 @@ public class ConstructBinaryTree {
 		if (pre == null || pre.length == 0) {
 			return null;
 		}
+		int length = pre.length;
+		return construct(pre, post, 0, 0, length);
+	}
 
-		TreeNode root = new TreeNode(pre[0]);
-		if (pre.length == 1) {
+	//pre = [1,2,4,5,3,6,7], post = [4,5,2,6,7,3,1]
+	//pre = [1,2,4,3,6,7], post = [4,2,6,7,3,1]
+	// [1,3,2,4] [3,4,2,1]
+	public TreeNode construct(int[] pre, int[] post, int l0, int l1, int length) {
+		if (length < 1) {
+			return null;
+		}
+		TreeNode root = new TreeNode(pre[l0]);
+		if (length == 1) {
 			return root;
 		}
-		int leftRoot = pre[1];
-		int postIndex = -1;
-		for (int i = 0; i < post.length; i++) {
-			if (post[i] == leftRoot) {
-				postIndex = i;
+		int v = pre[l0 + 1];
+		int idx = 0;
+		for (int i = l1; i < l1 + length; i++) {
+			if (post[i] == v) {
+				idx = i;
 				break;
 			}
 		}
-
-		root.left = constructFromPrePost(Arrays.copyOfRange(pre, 1, postIndex + 2),
-				Arrays.copyOfRange(post, 0, postIndex + 1));
-		root.right = constructFromPrePost(Arrays.copyOfRange(pre, postIndex + 2, pre.length),
-				Arrays.copyOfRange(post, postIndex + 1, pre.length - 1));
-
+		int leftLength = idx - l1 + 1;
+		root.left = construct(pre, post, l0 + 1, l1, leftLength);
+		int rightLength = length - leftLength - 1;
+		root.right = construct(pre, post, l0 + leftLength + 1, l1 + leftLength, rightLength);
 		return root;
 	}
 

@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import javafx.scene.control.TreeCell;
 
 public class RandomPickwithWeight {
 
@@ -22,29 +26,21 @@ public class RandomPickwithWeight {
 		System.out.println(map.toString());
 	}
 
-	int[] r;
-	Random random;
+	TreeMap<Integer,Integer> map = new TreeMap<>();
+	Random random = new Random();
+	int sum = 0;
 
 	public RandomPickwithWeight(int[] w) {
-		r = new int[w.length];
-		r[0] = w[0];
-		for (int i = 1; i < w.length; i++) {
-			r[i] = r[i - 1] + w[i];
+		int i=0;
+		for (int n : w) {
+			map.put(sum, i++);
+			sum += n;
 		}
-		System.out.println(Arrays.toString(r));
-		random = new Random();
 	}
 
 	public int pickIndex() {
-		int v = random.nextInt(r[r.length - 1]) + 1;
-		int t = Arrays.binarySearch(r, v);
-		if (t >= 0) {
-			return t;
-		} else {
-			t = -t;
-			t = t - 1;
-			return t;
-		}
+		int r = random.nextInt(sum);
+		return map.floorEntry(r).getValue();
 	}
 
 }
